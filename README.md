@@ -2,20 +2,20 @@
 # Cloudflare-workers/pages代理脚本
 
 ---------------------------------------------
-## 一：CF Vless节点可设置的变量内容
+## 一：Cloudflare Vless节点可设置的变量内容
 | 变量作用 | 变量名称| 变量值要求| 变量默认值| 变量要求|
 | :--- | :--- | :--- | :--- | :--- |
 | 1、必要的uuid | uuid (小写字母) |符合uuid规定格式 |默认uuid：5e73fef9-6b67-4901-a501-a1376c933d8f|建议更改|
-| 2、全局节点能上CF类网站 | proxyip (小写字母) |443端口：ipv4地址、[ipv6地址]、域名。非443端口：IPV4地址:端口、[IPV6地址]:端口、域名:端口|proxyip域名：ts.hpc.tw公用域名|可选|
+| 2、全局节点能上Cloudflare类网站 | proxyip (小写字母) |443端口：ipv4地址、[ipv6地址]、域名。非443端口：IPV4地址:端口、[IPV6地址]:端口、域名:端口|proxyip域名：ts.hpc.tw公用域名|可选|
 | 3、订阅节点：优选IP | ip1到ip13，共13个 |Cloudflare官方IP、Cloudflare反代IP、Cloudflare优选域名| Cloudflare官方不同地区的visa域名|可选|
 | 4、订阅节点：优选IP对应端口 | pt1到pt13，共13个 |Cloudflare13个标准端口、反代IP对应任意端口| Cloudflare13个标准端口|可选|
 
-## 二：CF Trojan节点可设置的变量内容
+## 二：Cloudflare Trojan节点可设置的变量内容
 
 | 变量作用 | 变量名称| 变量值要求| 变量默认值| 变量要求|
 | :--- | :--- | :--- | :--- | :--- |
 | 1、必要的密码 | pswd (小写字母) |建议字母数字 |默认密码：helloworld|建议更改|
-| 2、全局节点能上CF类网站 | proxyip (小写字母) |443端口：ipv4地址、[ipv6地址]、域名。非443端口：IPV4地址:端口、[IPV6地址]:端口、域名:端口|proxyip域名：ts.hpc.tw公用域名|可选|
+| 2、全局节点能上Cloudflare类网站 | proxyip (小写字母) |443端口：ipv4地址、[ipv6地址]、域名。非443端口：IPV4地址:端口、[IPV6地址]:端口、域名:端口|proxyip域名：ts.hpc.tw公用域名|可选|
 | 3、订阅节点：优选IP | ip1到ip13，共13个 |Cloudflare官方IP、Cloudflare反代IP、Cloudflare优选域名| Cloudflare官方不同地区的visa域名|可选|
 | 4、订阅节点：优选IP对应端口 | pt1到pt13，共13个 |Cloudflare13个标准端口、反代IP对应任意端口| Cloudflare13个标准端口|可选|
 
