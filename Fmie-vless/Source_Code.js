@@ -8,23 +8,23 @@ let userID = "5e73fef9-6b67-4901-a501-a1376c933d8f";
 
 const proxyIPs = ["104.224.181.22"]; 
 const cn_hostnames = [''];
-let CDNIP = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u0073\u0067'
+let CDNIP = 'www.visa.com.sg'
 // http_ip
-let IP1 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
-let IP2 = '\u0063\u0069\u0073\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
-let IP3 = '\u0061\u0066\u0072\u0069\u0063\u0061\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
-let IP4 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u0073\u0067'
-let IP5 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u0065\u0075\u0072\u006f\u0070\u0065\u002e\u0061\u0074'
-let IP6 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u006d\u0074'
-let IP7 = '\u0071\u0061\u002e\u0076\u0069\u0073\u0061\u006d\u0069\u0064\u0064\u006c\u0065\u0065\u0061\u0073\u0074\u002e\u0063\u006f\u006d'
+let IP1 = 'www.visa.com'
+let IP2 = 'cis.visa.com'
+let IP3 = 'africa.visa.com'
+let IP4 = 'www.visa.com.sg'
+let IP5 = 'www.visaeurope.at'
+let IP6 = 'www.visa.com.mt'
+let IP7 = 'qa.visamiddleeast.com'
 
 // https_ip
-let IP8 = '\u0075\u0073\u0061\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
-let IP9 = '\u006d\u0079\u0061\u006e\u006d\u0061\u0072\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d'
-let IP10 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u0074\u0077'
-let IP11 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u0065\u0075\u0072\u006f\u0070\u0065\u002e\u0063\u0068'
-let IP12 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u002e\u0063\u006f\u006d\u002e\u0062\u0072'
-let IP13 = '\u0077\u0077\u0077\u002e\u0076\u0069\u0073\u0061\u0073\u006f\u0075\u0074\u0068\u0065\u0061\u0073\u0074\u0065\u0075\u0072\u006f\u0070\u0065\u002e\u0063\u006f\u006d'
+let IP8 = 'usa.visa.com'
+let IP9 = 'myanmar.visa.com'
+let IP10 = 'www.visa.com.tw'
+let IP11 = 'www.visaeurope.ch'
+let IP12 = 'www.visa.com.br'
+let IP13 = 'www.visasoutheasteurope.com'
 
 // http_port
 let PT1 = '80'
@@ -119,8 +119,8 @@ export default {
         const url = new URL(request.url);
         switch (url.pathname) {
           case `/${userID}`: {
-            const \u0076\u006c\u0065\u0073\u0073Config = get\u0076\u006c\u0065\u0073\u0073Config(userID, request.headers.get("Host"));
-            return new Response(`${\u0076\u006c\u0065\u0073\u0073Config}`, {
+            const vlessConfig = getvlessConfig(userID, request.headers.get("Host"));
+            return new Response(`${vlessConfig}`, {
               status: 200,
               headers: {
                 "Content-Type": "text/html;charset=utf-8",
@@ -406,7 +406,7 @@ export default {
 					}
 				}	
 			}
-        return await \u0076\u006c\u0065\u0073\u0073OverWSHandler(request);
+        return await vlessOverWSHandler(request);
 		}
     } catch (err) {
       /** @type {Error} */ let e = err;
@@ -424,7 +424,7 @@ function isValidIP(ip) {
  *
  * @param {any} request
  */
-async function \u0076\u006c\u0065\u0073\u0073OverWSHandler(request) {
+async function vlessOverWSHandler(request) {
   /** @type {any} */
   // @ts-ignore
   const webSocketPair = new WebSocketPair();
@@ -1014,9 +1014,9 @@ async function handleUDPOutBound(webSocket, cloudflareResponseHeader, log) {
  * @param {string | null} hostName
  * @returns {string}
  */
-function get\u0076\u006c\u0065\u0073\u0073Config(userID, hostName) {
-  const w\u0076\u006c\u0065\u0073\u0073ws = `\u0076\u006c\u0065\u0073\u0073://${userID}@${CDNIP}:8880?encryption=none&security=none&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#${hostName}`;
-  const p\u0076\u006c\u0065\u0073\u0073wstls = `\u0076\u006c\u0065\u0073\u0073://${userID}@${CDNIP}:8443?encryption=none&security=tls&type=ws&host=${hostName}&sni=${hostName}&fp=random&path=%2F%3Fed%3D2560#${hostName}`;
+function getvlessConfig(userID, hostName) {
+  const wvlessws = `vless://${userID}@${CDNIP}:8880?encryption=none&security=none&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#${hostName}`;
+  const pvlesswstls = `vless://${userID}@${CDNIP}:8443?encryption=none&security=tls&type=ws&host=${hostName}&sni=${hostName}&fp=random&path=%2F%3Fed%3D2560#${hostName}`;
   const note = `GlobalProxyIP：${proxyIP}`;
   const ty = `https://${hostName}/${userID}/ty`
   const cl = `https://${hostName}/${userID}/cl`
@@ -1025,10 +1025,10 @@ function get\u0076\u006c\u0065\u0073\u0073Config(userID, hostName) {
   const pcl = `https://${hostName}/${userID}/pcl`
   const psb = `https://${hostName}/${userID}/psb`
 
-  const wk\u0076\u006c\u0065\u0073\u0073share = btoa(`\u0076\u006c\u0065\u0073\u0073://${userID}@${IP1}:${PT1}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V1_${IP1}_${PT1}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP2}:${PT2}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V2_${IP2}_${PT2}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP3}:${PT3}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V3_${IP3}_${PT3}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP4}:${PT4}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V4_${IP4}_${PT4}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP5}:${PT5}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V5_${IP5}_${PT5}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP6}:${PT6}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V6_${IP6}_${PT6}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP7}:${PT7}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V7_${IP7}_${PT7}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);
+  const wkvlessshare = btoa(`vless://${userID}@${IP1}:${PT1}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V1_${IP1}_${PT1}\nvless://${userID}@${IP2}:${PT2}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V2_${IP2}_${PT2}\nvless://${userID}@${IP3}:${PT3}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V3_${IP3}_${PT3}\nvless://${userID}@${IP4}:${PT4}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V4_${IP4}_${PT4}\nvless://${userID}@${IP5}:${PT5}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V5_${IP5}_${PT5}\nvless://${userID}@${IP6}:${PT6}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V6_${IP6}_${PT6}\nvless://${userID}@${IP7}:${PT7}?encryption=none&security=none&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V7_${IP7}_${PT7}\nvless://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\nvless://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\nvless://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\nvless://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\nvless://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\nvless://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);
 
 
-  const pg\u0076\u006c\u0065\u0073\u0073share = btoa(`\u0076\u006c\u0065\u0073\u0073://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);	
+  const pgvlessshare = btoa(`vless://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\nvless://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\nvless://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\nvless://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\nvless://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\nvless://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);	
 
 	
   const noteshow = note.replace(/\n/g, '<br>');
@@ -1248,7 +1248,7 @@ ${displayHtml}
 	    <hr>
             <br>
             <br>
-            <h3>1：CF-workers-\u0076\u006c\u0065\u0073\u0073+ws节点</h3>
+            <h3>1：CF-workers-vless+ws节点</h3>
 			<table class="table">
 				<thead>
 					<tr>
@@ -1259,8 +1259,8 @@ ${displayHtml}
 				<tbody>
 					<tr>
 						<td class="limited-width">关闭了TLS加密，无视域名阻断</td>
-						<td class="limited-width">${w\u0076\u006c\u0065\u0073\u0073ws}</td>
-						<td><button class="btn btn-primary" onclick="copyToClipboard('${w\u0076\u006c\u0065\u0073\u0073ws}')">点击复制链接</button></td>
+						<td class="limited-width">${wvlessws}</td>
+						<td><button class="btn btn-primary" onclick="copyToClipboard('${wvlessws}')">点击复制链接</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -1279,7 +1279,7 @@ ${displayHtml}
 			<hr>
             <br>
             <br>
-            <h3>2：CF-workers-\u0076\u006c\u0065\u0073\u0073+ws+tls节点</h3>
+            <h3>2：CF-workers-vless+ws+tls节点</h3>
 			<table class="table">
 				<thead>
 					<tr>
@@ -1290,8 +1290,8 @@ ${displayHtml}
 				<tbody>
 					<tr>
 						<td class="limited-width">启用了TLS加密，<br>如果客户端支持分片(Fragment)功能，建议开启，防止域名阻断</td>
-						<td class="limited-width">${p\u0076\u006c\u0065\u0073\u0073wstls}</td>	
-						<td><button class="btn btn-primary" onclick="copyToClipboard('${p\u0076\u006c\u0065\u0073\u0073wstls}')">点击复制链接</button></td>
+						<td class="limited-width">${pvlesswstls}</td>	
+						<td><button class="btn btn-primary" onclick="copyToClipboard('${pvlesswstls}')">点击复制链接</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -1325,7 +1325,7 @@ ${displayHtml}
 					</thead>
 					<tbody>
 						<tr>
-							<td><button class="btn btn-primary" onclick="copyToClipboard('${wk\u0076\u006c\u0065\u0073\u0073share}')">点击复制链接</button></td>
+							<td><button class="btn btn-primary" onclick="copyToClipboard('${wkvlessshare}')">点击复制链接</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -1397,7 +1397,7 @@ ${displayHtml}
 			<hr>
             <br>
             <br>
-            <h3>1：CF-pages/workers/自定义域-\u0076\u006c\u0065\u0073\u0073+ws+tls节点</h3>
+            <h3>1：CF-pages/workers/自定义域-vless+ws+tls节点</h3>
 			<table class="table">
 				<thead>
 					<tr>
@@ -1408,8 +1408,8 @@ ${displayHtml}
 				<tbody>
 					<tr>
 						<td class="limited-width">启用了TLS加密，<br>如果客户端支持分片(Fragment)功能，可开启，防止域名阻断</td>
-						<td class="limited-width">${p\u0076\u006c\u0065\u0073\u0073wstls}</td>
-						<td><button class="btn btn-primary" onclick="copyToClipboard('${p\u0076\u006c\u0065\u0073\u0073wstls}')">点击复制链接</button></td>
+						<td class="limited-width">${pvlesswstls}</td>
+						<td><button class="btn btn-primary" onclick="copyToClipboard('${pvlesswstls}')">点击复制链接</button></td>
 					</tr>
 				</tbody>
 			</table>
@@ -1443,7 +1443,7 @@ ${displayHtml}
 					</thead>
 					<tbody>
 						<tr>
-							<td><button class="btn btn-primary" onclick="copyToClipboard('${pg\u0076\u006c\u0065\u0073\u0073share}')">点击复制链接</button></td>
+							<td><button class="btn btn-primary" onclick="copyToClipboard('${pgvlessshare}')">点击复制链接</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -1533,7 +1533,7 @@ dns:
 
 proxies:
 - name: CF_V1_${IP1}_${PT1}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP1.replace(/[\[\]]/g, '')}
   port: ${PT1}
   uuid: ${userID}
@@ -1546,7 +1546,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V2_${IP2}_${PT2}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP2.replace(/[\[\]]/g, '')}
   port: ${PT2}
   uuid: ${userID}
@@ -1559,7 +1559,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V3_${IP3}_${PT3}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP3.replace(/[\[\]]/g, '')}
   port: ${PT3}
   uuid: ${userID}
@@ -1572,7 +1572,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V4_${IP4}_${PT4}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP4.replace(/[\[\]]/g, '')}
   port: ${PT4}
   uuid: ${userID}
@@ -1585,7 +1585,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V5_${IP5}_${PT5}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP5.replace(/[\[\]]/g, '')}
   port: ${PT5}
   uuid: ${userID}
@@ -1598,7 +1598,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V6_${IP6}_${PT6}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP6.replace(/[\[\]]/g, '')}
   port: ${PT6}
   uuid: ${userID}
@@ -1611,7 +1611,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V7_${IP7}_${PT7}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP7.replace(/[\[\]]/g, '')}
   port: ${PT7}
   uuid: ${userID}
@@ -1625,7 +1625,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V8_${IP8}_${PT8}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP8.replace(/[\[\]]/g, '')}
   port: ${PT8}
   uuid: ${userID}
@@ -1639,7 +1639,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V9_${IP9}_${PT9}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP9.replace(/[\[\]]/g, '')}
   port: ${PT9}
   uuid: ${userID}
@@ -1653,7 +1653,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V10_${IP10}_${PT10}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP10.replace(/[\[\]]/g, '')}
   port: ${PT10}
   uuid: ${userID}
@@ -1667,7 +1667,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V11_${IP11}_${PT11}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP11.replace(/[\[\]]/g, '')}
   port: ${PT11}
   uuid: ${userID}
@@ -1681,7 +1681,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V12_${IP12}_${PT12}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP12.replace(/[\[\]]/g, '')}
   port: ${PT12}
   uuid: ${userID}
@@ -1695,7 +1695,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V13_${IP13}_${PT13}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP13.replace(/[\[\]]/g, '')}
   port: ${PT13}
   uuid: ${userID}
@@ -1903,7 +1903,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -1920,7 +1920,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -1937,7 +1937,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -1954,7 +1954,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -1971,7 +1971,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -1988,7 +1988,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2005,7 +2005,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{     
@@ -2031,7 +2031,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2057,7 +2057,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2083,7 +2083,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2109,7 +2109,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2135,7 +2135,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2161,7 +2161,7 @@ return `{
 			"path": "/?ed=2560",
 			"type": "ws"
 		  },
-		  "type": "\u0076\u006c\u0065\u0073\u0073",
+		  "type": "vless",
 		  "uuid": "${userID}"
 		},
 		{
@@ -2272,8 +2272,8 @@ return `{
 }
 
 function getptyConfig(userID, hostName) {
-	const \u0076\u006c\u0065\u0073\u0073share = btoa(`\u0076\u006c\u0065\u0073\u0073://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\n\u0076\u006c\u0065\u0073\u0073://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);	
-		return `${\u0076\u006c\u0065\u0073\u0073share}`
+	const vlessshare = btoa(`vless://${userID}@${IP8}:${PT8}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V8_${IP8}_${PT8}\nvless://${userID}@${IP9}:${PT9}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V9_${IP9}_${PT9}\nvless://${userID}@${IP10}:${PT10}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V10_${IP10}_${PT10}\nvless://${userID}@${IP11}:${PT11}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V11_${IP11}_${PT11}\nvless://${userID}@${IP12}:${PT12}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V12_${IP12}_${PT12}\nvless://${userID}@${IP13}:${PT13}?encryption=none&security=tls&sni=${hostName}&fp=randomized&type=ws&host=${hostName}&path=%2F%3Fed%3D2560#CF_V13_${IP13}_${PT13}`);	
+		return `${vlessshare}`
 	}
 	
 function getpclConfig(userID, hostName) {
@@ -2308,7 +2308,7 @@ dns:
 
 proxies:
 - name: CF_V8_${IP8}_${PT8}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP8.replace(/[\[\]]/g, '')}
   port: ${PT8}
   uuid: ${userID}
@@ -2322,7 +2322,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V9_${IP9}_${PT9}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP9.replace(/[\[\]]/g, '')}
   port: ${PT9}
   uuid: ${userID}
@@ -2336,7 +2336,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V10_${IP10}_${PT10}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP10.replace(/[\[\]]/g, '')}
   port: ${PT10}
   uuid: ${userID}
@@ -2350,7 +2350,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V11_${IP11}_${PT11}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP11.replace(/[\[\]]/g, '')}
   port: ${PT11}
   uuid: ${userID}
@@ -2364,7 +2364,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V12_${IP12}_${PT12}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP12.replace(/[\[\]]/g, '')}
   port: ${PT12}
   uuid: ${userID}
@@ -2378,7 +2378,7 @@ proxies:
       Host: ${hostName}
 
 - name: CF_V13_${IP13}_${PT13}
-  type: \u0076\u006c\u0065\u0073\u0073
+  type: vless
   server: ${IP13.replace(/[\[\]]/g, '')}
   port: ${PT13}
   uuid: ${userID}
@@ -2567,7 +2567,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
@@ -2593,7 +2593,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
@@ -2619,7 +2619,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
@@ -2645,7 +2645,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
@@ -2671,7 +2671,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
@@ -2697,7 +2697,7 @@ return `{
 				"path": "/?ed=2560",
 				"type": "ws"
 			  },
-			  "type": "\u0076\u006c\u0065\u0073\u0073",
+			  "type": "vless",
 			  "uuid": "${userID}"
 			},
 			{
